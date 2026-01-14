@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Shop - La Experiencia Definitiva en Hamburguesas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>    
+    /* Variables para manejo de colores y temas */
+:root {
+    --primary: #f04f19;
+    --background-light: #f8f6f6;
+    --text-dark: #1c110d;
+    --text-muted: #9b5f4b;
+    --border-color: #e8d5cf;
+    --white: #ffffff;
+}
+
+/* Modo Oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-light: #221510;
+        --text-dark: #ffffff;
+        --text-muted: #d1b1a7;
+        --border-color: #3d2a23;
+        --card-bg: #2a1b15;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.5;
+    padding-bottom: 80px; 
+}
+
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(248, 246, 246, 0.8);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .header { background-color: rgba(34, 21, 16, 0.8); }
+}
+
+.logo { font-size: 1.125rem; font-weight: 700; }
+
+.cart-button {
+    background: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: white;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 1rem;
+}
+
+.hero-content {
+    min-height: 400px;
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1000');
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    color: white;
+}
+
+.hero-content h1 { font-size: 2.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+.hero-content p { font-size: 1rem; max-width: 300px; margin-bottom: 1.5rem; opacity: 0.9; }
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    width: max-content;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(240, 79, 25, 0.3);
+}
+
+/* Navigation Links */
+.quick-links {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem 1rem 0;
+    overflow-x: auto;
+}
+
+.quick-links::-webkit-scrollbar { display: none; }
+
+.quick-links button {
+    white-space: nowrap;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.quick-links button.link-active {
+    background: rgba(240, 79, 25, 0.1);
+    color: var(--primary);
+    border: none;
+}
+
+/* Product Grid */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 1rem 1rem;
+}
+
+.see-all { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.875rem; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.product-image {
+    aspect-ratio: 1/1;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.75rem;
+    position: relative;
+}
+
+.add-button {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.product-info .name { font-weight: 700; margin-top: 0.5rem; }
+.product-info .price { color: var(--primary); font-weight: 800; }
+.product-info .description { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Loyalty Card */
+.loyalty-container { padding: 1rem; margin-top: 1rem; }
+.loyalty-card {
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg, #fff);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loyalty-text .title { font-weight: 700; }
+.loyalty-text .subtitle { font-size: 0.875rem; color: var(--text-muted); max-width: 240px; }
+
+.btn-primary-sm {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(248, 246, 246, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bottom-nav { background: rgba(34, 21, 16, 0.95); }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.nav-item.active { color: var(--primary); font-weight: 700; }
+</style>
+
+
+</head>
+<body>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>La Experiencia <br>Definitiva en Burgers</h1>
+                <p>Disfruta de las hamburguesas más jugosas de la ciudad, elaboradas con ingredientes premium y mucho amor.</p>
+                <button class="btn-primary">Pide Ahora</button>
+            </div>
+        </section>
+
+        <nav class="quick-links">
+            <button class="link-active">Menú</button>
+            <button>Sucursales</button>
+            <button>Nosotros</button>
+            <button>Ofertas</button>
+        </nav>
+
+        <div class="section-header">
+            <h2>Especiales de la Semana</h2>
+            <a href="#" class="see-all">Ver todo</a>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500');">
+                    <button class="add-button"><span class="material-symbols-outlined">add</span></button>
+                </div>
+                <div class="product-info">
+                    <p class="name">Bestia Clásica</p>
+                    <p class="price">$12.99</p>
+                    <p class="description">Carne a la parrilla, vegetales frescos</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=500');">
+                    <button class="add-button"><span class="material-symbols-outlined">add</span></button>
+                </div>
+                <div class="product-info">
+                    <p class="name">Crujiente BBQ Ahumada</p>
+                    <p class="price">$14.50</p>
+                    <p class="description">Cebollas crujientes y doble tocino</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?q=80&w=500');">
+                    <button class="add-button"><span class="material-symbols-outlined">add</span></button>
+                </div>
+                <div class="product-info">
+                    <p class="name">Delicia Veggie</p>
+                    <p class="price">$11.99</p>
+                    <p class="description">Medallón de origen vegetal, alioli vegano</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1550317144-b38c5f0776d1?q=80&w=500');">
+                    <button class="add-button"><span class="material-symbols-outlined">add</span></button>
+                </div>
+                <div class="product-info">
+                    <p class="name">Doble Queso Melt</p>
+                    <p class="price">$15.99</p>
+                    <p class="description">Extra queso, salsa secreta</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="loyalty-container">
+            <div class="loyalty-card">
+                <div class="loyalty-text">
+                    <p class="title">Únete al Club</p>
+                    <p class="subtitle">Recibe un 10% de descuento en tu primer pedido y acumula puntos con cada bocado.</p>
+                </div>
+                <button class="btn-primary-sm">Registrarse</button>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
